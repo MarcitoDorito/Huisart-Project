@@ -75,7 +75,7 @@ namespace Huisart_Project
 
        private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
        {
-         if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+         if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
             {
                 e.Handled = true;
             } 
@@ -95,7 +95,17 @@ namespace Huisart_Project
                 }
                 else
                 {
-                    dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' OR Achternaam LIKE '%{0}%'", filterText);
+                    filterText = filterText.Replace("'", "''");
+                    string[] filterPart = filterText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (filterPart.Length == 1)
+                    {
+                        dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' OR Achternaam LIKE '%{0}%'", filterPart[0]);
+                    }
+                    else if (filterPart.Length == 2)
+                    {
+                        dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' AND Achternaam LIKE '%{1}%'", filterPart[0], filterPart[1]);
+                    }
+                    /*                    dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' OR Achternaam LIKE '%{0}%'", filterText);*/
                 }
             }
         }
