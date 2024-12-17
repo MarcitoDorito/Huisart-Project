@@ -24,6 +24,10 @@ namespace Huisart_Project
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ZoekBalk.GotFocus += RemoveText;
+            ZoekBalk.LostFocus += AddText;
+            AddText(null, null);
+
             List<DatabaseHelper.Patienten> patienten = databaseHelper.GetPatienten();
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Voornaam");
@@ -37,6 +41,77 @@ namespace Huisart_Project
                 dataTable.Rows.Add(patient.voornaam, patient.achternaam, patient.adres, patient.emailadres, patient.telefoonnummer);
             }
             PatientenGrid.DataSource = dataTable;
+        }
+
+        private void RemoveText(object sender, EventArgs e)
+        {
+            if (ZoekBalk.Text == "Zoek hier naar een patient")
+            {
+                ZoekBalk.Text = "";
+                ZoekBalk.ForeColor = Color.Black;
+            }
+        }
+
+        private void AddText(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ZoekBalk.Text))
+            {
+                ZoekBalk.Text = "Zoek hier naar een patient";
+                ZoekBalk.ForeColor = Color.Gray;
+            }
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            ToevoegPanel.Visible = true;
+            AddButton.Enabled = false;
+        }
+
+        private void ToevoegBtn_Click(object sender, EventArgs e)
+        {
+            ToevoegPanel.Visible =false;
+            AddButton.Enabled = true;
+        }
+
+       private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
+       {
+         if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
+            } 
+       }
+
+        private void ZoekBalk_TextChanged(object sender, EventArgs e)
+        {
+            string filterText = ZoekBalk.Text;
+            var dataTable = PatientenGrid.DataSource as DataTable;
+            if (dataTable != null)
+            {
+/*                DataView dataView = (PatientenGrid.DataSource as DataTable).DefaultView;*/
+                DataView dataView = dataTable.DefaultView;
+                if (string.IsNullOrWhiteSpace(filterText) || filterText == "Zoek hier naar een patient")
+                {
+                    dataView.RowFilter = string.Empty;
+                }
+                else
+                {
+                    dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' OR Achternaam LIKE '%{0}%'", filterText);
+                }
+            }
+        }
+
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            if (ZoekBalk.Text != "Zoek hier naar een patient")
+            {
+                ZoekBalk.Text = "";
+                AddText(null, null);
+            }
+            else
+            {
+                return;
+            }
+
         }
     }
 }
