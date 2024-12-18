@@ -76,8 +76,40 @@ namespace Huisart_Project
 
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
-            if (NaamTxtBx.Text != null && AchternaamTxtBx.Text != null && AdresTxtBx.Text != null && EmailTxtBx.Text != null && TeleTxtBx.Text != null)
+            // Checkt of de textboxes niet leeg zijn
+            if (!string.IsNullOrEmpty(NaamTxtBx.Text) &&
+                !string.IsNullOrEmpty(AchternaamTxtBx.Text) &&
+                !string.IsNullOrEmpty(AdresTxtBx.Text) &&
+                !string.IsNullOrEmpty(EmailTxtBx.Text) &&
+                !string.IsNullOrEmpty(TeleTxtBx.Text))
             {
+                // Voegt de nieuwe patient toe aan de datatable
+                DataTable dataTable = (DataTable)PatientenGrid.DataSource;
+                DataRow newRow = dataTable.NewRow();
+                newRow["Voornaam"] = NaamTxtBx.Text;
+                newRow["Achternaam"] = AchternaamTxtBx.Text;
+                newRow["Adres"] = AdresTxtBx.Text;
+                newRow["Emailadres"] = EmailTxtBx.Text;
+                newRow["Telefoonnummer"] = TeleTxtBx.Text;
+                dataTable.Rows.Add(newRow);
+
+                string query = "INSERT INTO patienten (first_name, last_name, Adres, email, Telefoonnummer) VALUES (@first_name, @last_name, @Adres, @email, @Telefoonnummer)";
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    using(MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@first_name", NaamTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@last_name", AchternaamTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@Adres", AdresTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@email", EmailTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@Telefoonnummer", TeleTxtBx.Text);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Maakt de textboxes leeg
                 NaamTxtBx.Text = "";
                 AchternaamTxtBx.Text = "";
                 AdresTxtBx.Text = "";
@@ -92,6 +124,7 @@ namespace Huisart_Project
 
         private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Checkt of de input een letter is
             if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
             {
                 e.Handled = true;
@@ -100,6 +133,7 @@ namespace Huisart_Project
 
         private void GeenLetters_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Checkt of de input een nummer is
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '-')
             {
                 e.Handled = true;
@@ -108,6 +142,7 @@ namespace Huisart_Project
 
         private void ZoekBalk_TextChanged(object sender, EventArgs e)
         {
+            // Filtert de datatable op basis van de zoekbalk
             string filterText = ZoekBalk.Text;
             var dataTable = PatientenGrid.DataSource as DataTable;
             if (dataTable != null)
@@ -135,6 +170,7 @@ namespace Huisart_Project
 
         private void ClearBtn_Click(object sender, EventArgs e)
         {
+            // Maakt de zoekbalk leeg
             if (ZoekBalk.Text != "Zoek hier naar een patient")
             {
                 ZoekBalk.Text = "";
@@ -149,6 +185,7 @@ namespace Huisart_Project
 
         private void TeleTxtBx_TextChanged(object sender, EventArgs e)
         {
+            // Voegt streepjes toe aan het telefoonnummer
             string Text = TeleTxtBx.Text.Replace("-", string.Empty);
             if (Text.Length > 3 && Text.Length <= 6)
             {
@@ -158,15 +195,22 @@ namespace Huisart_Project
             {
                 Text = Text.Insert(3, "-").Insert(7, "-");
             }
+            // Zorgt ervoor dat de cursor niet naar het begin van de textbox springt
             TeleTxtBx.TextChanged -= TeleTxtBx_TextChanged;
             TeleTxtBx.Text = Text;
             TeleTxtBx.SelectionStart = TeleTxtBx.Text.Length;
             TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
+            // Checkt of de textboxes niet leeg zijn
+            InputCheck(sender, e);
         }
 
         private void InputCheck(object sender, EventArgs e)
         {
-            if (NaamTxtBx.Text != null && AchternaamTxtBx.Text != null && AdresTxtBx.Text != null && EmailTxtBx.Text != null)
+            if (!string.IsNullOrWhiteSpace(NaamTxtBx.Text)&&
+                !string.IsNullOrWhiteSpace(AchternaamTxt.Text)&&
+                !string.IsNullOrWhiteSpace(AdresTxtBx.Text)&&
+                !string.IsNullOrWhiteSpace(EmailTxtBx.Text)&&
+                !string.IsNullOrWhiteSpace(TeleTxtBx.Text))
             {
                 ToevoegBtn.Enabled = true;
             }
@@ -174,6 +218,35 @@ namespace Huisart_Project
             {
                 ToevoegBtn.Enabled = false;
             }
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            ToevoegPanel.Visible = false;
+            AddButton.Enabled = true;
+            // Checkt of de textboxes niet leeg zijn
+            if (!string.IsNullOrEmpty(NaamTxtBx.Text) &&
+                !string.IsNullOrEmpty(AchternaamTxtBx.Text) &&
+                !string.IsNullOrEmpty(AdresTxtBx.Text) &&
+                !string.IsNullOrEmpty(EmailTxtBx.Text) &&
+                !string.IsNullOrEmpty(TeleTxtBx.Text))
+            {
+                // Maakt de textboxes leeg
+                NaamTxtBx.Text = "";
+                AchternaamTxtBx.Text = "";
+                AdresTxtBx.Text = "";
+                EmailTxtBx.Text = "";
+                TeleTxtBx.Text = "";
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void PatientenGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                PatientenBtnPnl.Visible = true;
         }
     }
 }
