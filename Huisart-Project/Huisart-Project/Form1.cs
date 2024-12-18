@@ -81,6 +81,14 @@ namespace Huisart_Project
             } 
        }
 
+        private void GeenLetters_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '-')
+            {
+                e.Handled = true;
+            }
+        }
+
         private void ZoekBalk_TextChanged(object sender, EventArgs e)
         {
             string filterText = ZoekBalk.Text;
