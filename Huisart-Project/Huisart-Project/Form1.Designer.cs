@@ -37,11 +37,11 @@
             this.AdresTxt = new System.Windows.Forms.Label();
             this.AchternaamTxt = new System.Windows.Forms.Label();
             this.NaamTxt = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TeleTxtBx = new System.Windows.Forms.TextBox();
+            this.EmailTxtBx = new System.Windows.Forms.TextBox();
+            this.AdresTxtBx = new System.Windows.Forms.TextBox();
+            this.AchternaamTxtBx = new System.Windows.Forms.TextBox();
+            this.NaamTxtBx = new System.Windows.Forms.TextBox();
             this.ZoekBalk = new System.Windows.Forms.TextBox();
             this.ClearBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PatientenGrid)).BeginInit();
@@ -79,11 +79,11 @@
             this.ToevoegPanel.Controls.Add(this.AdresTxt);
             this.ToevoegPanel.Controls.Add(this.AchternaamTxt);
             this.ToevoegPanel.Controls.Add(this.NaamTxt);
-            this.ToevoegPanel.Controls.Add(this.textBox5);
-            this.ToevoegPanel.Controls.Add(this.textBox4);
-            this.ToevoegPanel.Controls.Add(this.textBox3);
-            this.ToevoegPanel.Controls.Add(this.textBox2);
-            this.ToevoegPanel.Controls.Add(this.textBox1);
+            this.ToevoegPanel.Controls.Add(this.TeleTxtBx);
+            this.ToevoegPanel.Controls.Add(this.EmailTxtBx);
+            this.ToevoegPanel.Controls.Add(this.AdresTxtBx);
+            this.ToevoegPanel.Controls.Add(this.AchternaamTxtBx);
+            this.ToevoegPanel.Controls.Add(this.NaamTxtBx);
             this.ToevoegPanel.Location = new System.Drawing.Point(654, 18);
             this.ToevoegPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ToevoegPanel.Name = "ToevoegPanel";
@@ -152,48 +152,49 @@
             this.NaamTxt.TabIndex = 5;
             this.NaamTxt.Text = "Naam";
             // 
-            // textBox5
+            // TeleTxtBx
             // 
-            this.textBox5.Location = new System.Drawing.Point(166, 183);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(169, 26);
-            this.textBox5.TabIndex = 4;
-            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenLetters_KeyPress);
+            this.TeleTxtBx.Location = new System.Drawing.Point(166, 183);
+            this.TeleTxtBx.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TeleTxtBx.Name = "TeleTxtBx";
+            this.TeleTxtBx.Size = new System.Drawing.Size(169, 26);
+            this.TeleTxtBx.TabIndex = 4;
+            this.TeleTxtBx.TextChanged += new System.EventHandler(this.TeleTxtBx_TextChanged);
+            this.TeleTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenLetters_KeyPress);
             // 
-            // textBox4
+            // EmailTxtBx
             // 
-            this.textBox4.Location = new System.Drawing.Point(166, 142);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(169, 26);
-            this.textBox4.TabIndex = 3;
+            this.EmailTxtBx.Location = new System.Drawing.Point(166, 142);
+            this.EmailTxtBx.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EmailTxtBx.Name = "EmailTxtBx";
+            this.EmailTxtBx.Size = new System.Drawing.Size(169, 26);
+            this.EmailTxtBx.TabIndex = 3;
             // 
-            // textBox3
+            // AdresTxtBx
             // 
-            this.textBox3.Location = new System.Drawing.Point(166, 100);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(169, 26);
-            this.textBox3.TabIndex = 2;
+            this.AdresTxtBx.Location = new System.Drawing.Point(166, 100);
+            this.AdresTxtBx.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AdresTxtBx.Name = "AdresTxtBx";
+            this.AdresTxtBx.Size = new System.Drawing.Size(169, 26);
+            this.AdresTxtBx.TabIndex = 2;
             // 
-            // textBox2
+            // AchternaamTxtBx
             // 
-            this.textBox2.Location = new System.Drawing.Point(166, 58);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(169, 26);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
+            this.AchternaamTxtBx.Location = new System.Drawing.Point(166, 58);
+            this.AchternaamTxtBx.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AchternaamTxtBx.Name = "AchternaamTxtBx";
+            this.AchternaamTxtBx.Size = new System.Drawing.Size(169, 26);
+            this.AchternaamTxtBx.TabIndex = 1;
+            this.AchternaamTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
             // 
-            // textBox1
+            // NaamTxtBx
             // 
-            this.textBox1.Location = new System.Drawing.Point(166, 18);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 26);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
+            this.NaamTxtBx.Location = new System.Drawing.Point(166, 18);
+            this.NaamTxtBx.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NaamTxtBx.Name = "NaamTxtBx";
+            this.NaamTxtBx.Size = new System.Drawing.Size(169, 26);
+            this.NaamTxtBx.TabIndex = 0;
+            this.NaamTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
             // 
             // ZoekBalk
             // 
@@ -243,11 +244,11 @@
         private System.Windows.Forms.DataGridView PatientenGrid;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Panel ToevoegPanel;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox EmailTxtBx;
+        private System.Windows.Forms.TextBox AdresTxtBx;
+        private System.Windows.Forms.TextBox AchternaamTxtBx;
+        private System.Windows.Forms.TextBox NaamTxtBx;
+        private System.Windows.Forms.TextBox TeleTxtBx;
         private System.Windows.Forms.Label telefoonNummerTxt;
         private System.Windows.Forms.Label emaiTxt;
         private System.Windows.Forms.Label AdresTxt;

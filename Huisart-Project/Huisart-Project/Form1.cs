@@ -20,6 +20,8 @@ namespace Huisart_Project
         public Form1()
         {
             InitializeComponent();
+            TeleTxtBx.MaxLength = 12;
+            TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,6 +73,18 @@ namespace Huisart_Project
         {
             ToevoegPanel.Visible =false;
             AddButton.Enabled = true;
+            if (NaamTxtBx.Text != null && AchternaamTxtBx.Text != null && AdresTxtBx.Text != null && EmailTxtBx.Text != null && TeleTxtBx.Text != null)
+            {
+                NaamTxtBx.Text = "";
+                AchternaamTxtBx.Text = "";
+                AdresTxtBx.Text = "";
+                EmailTxtBx.Text = "";
+                TeleTxtBx.Text = "";
+            }
+            else
+            {
+                return;
+            }
         }
 
        private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
@@ -95,7 +109,6 @@ namespace Huisart_Project
             var dataTable = PatientenGrid.DataSource as DataTable;
             if (dataTable != null)
             {
-/*                DataView dataView = (PatientenGrid.DataSource as DataTable).DefaultView;*/
                 DataView dataView = dataTable.DefaultView;
                 if (string.IsNullOrWhiteSpace(filterText) || filterText == "Zoek hier naar een patient")
                 {
@@ -113,7 +126,6 @@ namespace Huisart_Project
                     {
                         dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' AND Achternaam LIKE '%{1}%'", filterPart[0], filterPart[1]);
                     }
-                    /*                    dataView.RowFilter = string.Format("Voornaam LIKE '%{0}%' OR Achternaam LIKE '%{0}%'", filterText);*/
                 }
             }
         }
@@ -130,6 +142,23 @@ namespace Huisart_Project
                 return;
             }
 
+        }
+
+        private void TeleTxtBx_TextChanged(object sender, EventArgs e)
+        {
+            string Text = TeleTxtBx.Text.Replace("-", string.Empty);
+            if (Text.Length > 3 && Text.Length <= 6)
+            {
+               Text = Text.Insert(3, "-");
+            }
+            else if(Text.Length > 6)
+            {
+                Text = Text.Insert(3, "-").Insert(7, "-");
+            }
+            TeleTxtBx.TextChanged -= TeleTxtBx_TextChanged;
+            TeleTxtBx.Text = Text;
+            TeleTxtBx.SelectionStart = TeleTxtBx.Text.Length;
+            TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
         }
     }
 }
