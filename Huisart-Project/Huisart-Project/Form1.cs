@@ -22,6 +22,7 @@ namespace Huisart_Project
             InitializeComponent();
             TeleTxtBx.MaxLength = 12;
             TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
+            ToevoegBtn.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace Huisart_Project
                 dataTable.Rows.Add(patient.voornaam, patient.achternaam, patient.adres, patient.emailadres, patient.telefoonnummer);
             }
             PatientenGrid.DataSource = dataTable;
+
         }
 
         private void RemoveText(object sender, EventArgs e)
@@ -71,7 +73,8 @@ namespace Huisart_Project
 
         private void ToevoegBtn_Click(object sender, EventArgs e)
         {
-            ToevoegPanel.Visible =false;
+
+            ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
             if (NaamTxtBx.Text != null && AchternaamTxtBx.Text != null && AdresTxtBx.Text != null && EmailTxtBx.Text != null && TeleTxtBx.Text != null)
             {
@@ -87,13 +90,13 @@ namespace Huisart_Project
             }
         }
 
-       private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
-       {
-         if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
+        private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
             {
                 e.Handled = true;
-            } 
-       }
+            }
+        }
 
         private void GeenLetters_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -149,9 +152,9 @@ namespace Huisart_Project
             string Text = TeleTxtBx.Text.Replace("-", string.Empty);
             if (Text.Length > 3 && Text.Length <= 6)
             {
-               Text = Text.Insert(3, "-");
+                Text = Text.Insert(3, "-");
             }
-            else if(Text.Length > 6)
+            else if (Text.Length > 6)
             {
                 Text = Text.Insert(3, "-").Insert(7, "-");
             }
@@ -159,6 +162,18 @@ namespace Huisart_Project
             TeleTxtBx.Text = Text;
             TeleTxtBx.SelectionStart = TeleTxtBx.Text.Length;
             TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
+        }
+
+        private void InputCheck(object sender, EventArgs e)
+        {
+            if (NaamTxtBx.Text != null && AchternaamTxtBx.Text != null && AdresTxtBx.Text != null && EmailTxtBx.Text != null)
+            {
+                ToevoegBtn.Enabled = true;
+            }
+            else
+            {
+                ToevoegBtn.Enabled = false;
+            }
         }
     }
 }

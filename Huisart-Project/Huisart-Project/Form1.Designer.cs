@@ -169,6 +169,7 @@
             this.EmailTxtBx.Name = "EmailTxtBx";
             this.EmailTxtBx.Size = new System.Drawing.Size(169, 26);
             this.EmailTxtBx.TabIndex = 3;
+            this.EmailTxtBx.TextChanged += new System.EventHandler(this.InputCheck);
             // 
             // AdresTxtBx
             // 
@@ -177,6 +178,7 @@
             this.AdresTxtBx.Name = "AdresTxtBx";
             this.AdresTxtBx.Size = new System.Drawing.Size(169, 26);
             this.AdresTxtBx.TabIndex = 2;
+            this.AdresTxtBx.TextChanged += new System.EventHandler(this.InputCheck);
             // 
             // AchternaamTxtBx
             // 
@@ -185,6 +187,7 @@
             this.AchternaamTxtBx.Name = "AchternaamTxtBx";
             this.AchternaamTxtBx.Size = new System.Drawing.Size(169, 26);
             this.AchternaamTxtBx.TabIndex = 1;
+            this.AchternaamTxtBx.TextChanged += new System.EventHandler(this.InputCheck);
             this.AchternaamTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
             // 
             // NaamTxtBx
@@ -194,6 +197,7 @@
             this.NaamTxtBx.Name = "NaamTxtBx";
             this.NaamTxtBx.Size = new System.Drawing.Size(169, 26);
             this.NaamTxtBx.TabIndex = 0;
+            this.NaamTxtBx.TextChanged += new System.EventHandler(this.InputCheck);
             this.NaamTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GeenNummer_KeyPress);
             // 
             // ZoekBalk
