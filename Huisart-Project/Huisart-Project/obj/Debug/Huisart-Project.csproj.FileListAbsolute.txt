@@ -77,10 +77,10 @@ C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.AssemblyReference.cache
-C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Form1.resources
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Properties.Resources.resources
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.GenerateResource.cache
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.CoreCompileInputs.cache
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-.BC189950.Up2Date
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.exe
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.pdb
+C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Dashboard.resources

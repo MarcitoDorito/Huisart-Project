@@ -29,6 +29,7 @@ namespace Huisart_Project
             public string adres;
             public string emailadres;
             public string telefoonnummer;
+            public string id;
         }
         public List<Patienten> GetPatienten()
         {
@@ -51,6 +52,7 @@ namespace Huisart_Project
                         patient.adres = reader["Adres"].ToString();
                         patient.emailadres = reader["email"].ToString();
                         patient.telefoonnummer = reader["Telefoonnummer"].ToString();
+                        patient.id = reader["id"].ToString();
                         patientenLijst.Add(patient);
                     }
                     reader.Close();

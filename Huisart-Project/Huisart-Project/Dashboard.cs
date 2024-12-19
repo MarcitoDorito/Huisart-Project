@@ -10,18 +10,20 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using Google.Protobuf.WellKnownTypes;
+using static Huisart_Project.DatabaseHelper;
+using System.IO;
 
 namespace Huisart_Project
 {
-    public partial class Form1 : Form
+    public partial class Dashboard : Form
     {
         private const string connectionString = "Server=LocalHost;Database=huisart;user=root";
         DatabaseHelper databaseHelper = new DatabaseHelper(connectionString);
-        public Form1()
+        public Dashboard()
         {
             InitializeComponent();
-            TeleTxtBx.MaxLength = 12;
-            TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
+            TelefoonnummerTxtBx.MaxLength = 12;
+            TelefoonnummerTxtBx.TextChanged += TeleTxtBx_TextChanged;
             ToevoegBtn.Enabled = false;
         }
 
@@ -31,6 +33,11 @@ namespace Huisart_Project
             ZoekBalk.LostFocus += AddText;
             AddText(null, null);
 
+            fillGrid();
+        }
+
+        private void fillGrid()
+        {
             List<DatabaseHelper.Patienten> patienten = databaseHelper.GetPatienten();
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Voornaam");
@@ -38,13 +45,14 @@ namespace Huisart_Project
             dataTable.Columns.Add("Adres");
             dataTable.Columns.Add("Emailadres");
             dataTable.Columns.Add("Telefoonnummer");
+            dataTable.Columns.Add("id");
 
             foreach (var patient in patienten)
             {
-                dataTable.Rows.Add(patient.voornaam, patient.achternaam, patient.adres, patient.emailadres, patient.telefoonnummer);
+                dataTable.Rows.Add(patient.voornaam, patient.achternaam, patient.adres, patient.emailadres, patient.telefoonnummer, patient.id);
             }
-            PatientenGrid.DataSource = dataTable;
 
+            PatientenGrid.DataSource = dataTable;
         }
 
         private void RemoveText(object sender, EventArgs e)
@@ -69,39 +77,62 @@ namespace Huisart_Project
         {
             ToevoegPanel.Visible = true;
             AddButton.Enabled = false;
+            ToevoegBtn.Text = "Toevoegen";
         }
 
-        private void ToevoegBtn_Click(object sender, EventArgs e)
-        {
 
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            ToevoegPanel.Visible = true;
+            AddButton.Enabled = false;
+            ToevoegBtn.Text = "Update";
+
+            foreach (DataGridViewColumn column in PatientenGrid.Columns)
+            {
+                foreach(Control control in ToevoegPanel.Controls)
+                {
+                    if(control.Name == column.HeaderText + "TxtBx")
+                    {
+                        control.Text = PatientenGrid.SelectedRows[0].Cells[column.HeaderText].Value.ToString();
+                    }
+                }
+            }
+        }
+
+        private void VoegToeAanDatabase()
+        {
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
+
             // Checkt of de textboxes niet leeg zijn
             if (TxtBoxTekstCheck())
             {
                 // Voegt de nieuwe patient toe aan de datatable
-                DataTable dataTable = (DataTable)PatientenGrid.DataSource;
-                DataRow newRow = dataTable.NewRow();
-                newRow["Voornaam"] = NaamTxtBx.Text;
-                newRow["Achternaam"] = AchternaamTxtBx.Text;
-                newRow["Adres"] = AdresTxtBx.Text;
-                newRow["Emailadres"] = EmailTxtBx.Text;
-                newRow["Telefoonnummer"] = TeleTxtBx.Text;
-                dataTable.Rows.Add(newRow);
+                //DataTable dataTable = (DataTable)PatientenGrid.DataSource;
+                //DataRow newRow = dataTable.NewRow();
+                //newRow["Voornaam"] = VoornaamTxtBx.Text;
+                //newRow["Achternaam"] = AchternaamTxtBx.Text;
+                //newRow["Adres"] = AdresTxtBx.Text;
+                //newRow["Emailadres"] = EmailadresTxtBx.Text;
+                //newRow["Telefoonnummer"] = TelefoonnummerTxtBx.Text;
+                //dataTable.Rows.Add(newRow);
 
-                string query = "INSERT INTO patienten (first_name, last_name, Adres, email, Telefoonnummer) VALUES (@first_name, @last_name, @Adres, @email, @Telefoonnummer)";
+                string query = "INSERT INTO patienten (first_name, last_name, Adres, email, Telefoonnummer) VALUES (@first_name, @last_name, @Adres, @email, @Telefoonnummer);";
+
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
-                    using(MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@first_name", NaamTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@first_name", VoornaamTxtBx.Text);
                         cmd.Parameters.AddWithValue("@last_name", AchternaamTxtBx.Text);
                         cmd.Parameters.AddWithValue("@Adres", AdresTxtBx.Text);
-                        cmd.Parameters.AddWithValue("@email", EmailTxtBx.Text);
-                        cmd.Parameters.AddWithValue("@Telefoonnummer", TeleTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@email", EmailadresTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@Telefoonnummer", TelefoonnummerTxtBx.Text);
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
+
+                        fillGrid();
                     }
                 }
 
@@ -111,6 +142,58 @@ namespace Huisart_Project
             else
             {
                 return;
+            }
+        }
+
+        private void UpdateInDatabase()
+        {
+            ToevoegPanel.Visible = false;
+            AddButton.Enabled = true;
+
+            // Checkt of de textboxes niet leeg zijn
+            if (TxtBoxTekstCheck())
+            {
+                string query = "UPDATE patienten SET first_name = @first_name, last_name = @last_name, Adres = @Adres, email = @email, Telefoonnummer = @Telefoonnummer WHERE id = @patient_id;";
+
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@first_name", VoornaamTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@last_name", AchternaamTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@Adres", AdresTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@email", EmailadresTxtBx.Text);
+                        cmd.Parameters.AddWithValue("@Telefoonnummer", TelefoonnummerTxtBx.Text);
+
+                        string id = PatientenGrid.SelectedRows[0].Cells["id"].Value.ToString();
+
+                        cmd.Parameters.AddWithValue("@patient_id", id);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        fillGrid();
+                    }
+                }
+
+                // Maakt de textboxes leeg
+                CleanTxtBox();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+
+        private void ToevoegBtn_Click(object sender, EventArgs e)
+        { 
+            if (ToevoegBtn.Text == "Toevoegen")
+            {
+                VoegToeAanDatabase();
+            }
+            else if (ToevoegBtn.Text == "Update")
+            {
+                UpdateInDatabase();
             }
         }
 
@@ -178,7 +261,7 @@ namespace Huisart_Project
         private void TeleTxtBx_TextChanged(object sender, EventArgs e)
         {
             // Voegt streepjes toe aan het telefoonnummer
-            string Text = TeleTxtBx.Text.Replace("-", string.Empty);
+            string Text = TelefoonnummerTxtBx.Text.Replace("-", string.Empty);
             if (Text.Length > 3 && Text.Length <= 6)
             {
                 Text = Text.Insert(3, "-");
@@ -188,10 +271,10 @@ namespace Huisart_Project
                 Text = Text.Insert(3, "-").Insert(7, "-");
             }
             // Zorgt ervoor dat de cursor niet naar het begin van de textbox springt
-            TeleTxtBx.TextChanged -= TeleTxtBx_TextChanged;
-            TeleTxtBx.Text = Text;
-            TeleTxtBx.SelectionStart = TeleTxtBx.Text.Length;
-            TeleTxtBx.TextChanged += TeleTxtBx_TextChanged;
+            TelefoonnummerTxtBx.TextChanged -= TeleTxtBx_TextChanged;
+            TelefoonnummerTxtBx.Text = Text;
+            TelefoonnummerTxtBx.SelectionStart = TelefoonnummerTxtBx.Text.Length;
+            TelefoonnummerTxtBx.TextChanged += TeleTxtBx_TextChanged;
             // Checkt of de textboxes niet leeg zijn
             InputCheck(sender, e);
         }
@@ -219,17 +302,30 @@ namespace Huisart_Project
         private void PatientenGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
                 PatientenBtnPnl.Visible = true;
+
+            if (PatientenGrid.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = PatientenGrid.SelectedRows[0];
+
+                var idValue = selectedRow.Cells["id"].Value;
+
+
+            }
+            else
+            {
+                MessageBox.Show("Geen rij geselecteerd");
+            }
         }
 
 
         private bool TxtBoxTekstCheck()
         {
             // Checkt of de textboxes niet leeg zijn
-            if (!string.IsNullOrEmpty(NaamTxtBx.Text) &&
+            if (!string.IsNullOrEmpty(VoornaamTxtBx.Text) &&
                 !string.IsNullOrEmpty(AchternaamTxtBx.Text) &&
                 !string.IsNullOrEmpty(AdresTxtBx.Text) &&
-                !string.IsNullOrEmpty(EmailTxtBx.Text) &&
-                !string.IsNullOrEmpty(TeleTxtBx.Text))
+                !string.IsNullOrEmpty(EmailadresTxtBx.Text) &&
+                !string.IsNullOrEmpty(TelefoonnummerTxtBx.Text))
             {
 
                 return true;
@@ -243,11 +339,33 @@ namespace Huisart_Project
         private void CleanTxtBox()
         {
             // Maakt de textboxes leeg
-            NaamTxtBx.Text = "";
+            VoornaamTxtBx.Text = "";
             AchternaamTxtBx.Text = "";
             AdresTxtBx.Text = "";
-            EmailTxtBx.Text = "";
-            TeleTxtBx.Text = "";
+            EmailadresTxtBx.Text = "";
+            TelefoonnummerTxtBx.Text = "";
+        }
+
+        private void PdeleteBtn_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRows = PatientenGrid.SelectedRows;
+
+            if (selectedRows.Count > 0)
+            {
+                string query = "DELETE FROM patienten WHERE id = @id";
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", selectedRows[0].Cells["id"].Value.ToString());
+                      
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        fillGrid();
+                    }
+                }
+            }
         }
     }
 }
