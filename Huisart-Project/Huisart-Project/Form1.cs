@@ -77,11 +77,7 @@ namespace Huisart_Project
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
             // Checkt of de textboxes niet leeg zijn
-            if (!string.IsNullOrEmpty(NaamTxtBx.Text) &&
-                !string.IsNullOrEmpty(AchternaamTxtBx.Text) &&
-                !string.IsNullOrEmpty(AdresTxtBx.Text) &&
-                !string.IsNullOrEmpty(EmailTxtBx.Text) &&
-                !string.IsNullOrEmpty(TeleTxtBx.Text))
+            if (TxtBoxTekstCheck())
             {
                 // Voegt de nieuwe patient toe aan de datatable
                 DataTable dataTable = (DataTable)PatientenGrid.DataSource;
@@ -110,11 +106,7 @@ namespace Huisart_Project
                 }
 
                 // Maakt de textboxes leeg
-                NaamTxtBx.Text = "";
-                AchternaamTxtBx.Text = "";
-                AdresTxtBx.Text = "";
-                EmailTxtBx.Text = "";
-                TeleTxtBx.Text = "";
+                CleanTxtBox();
             }
             else
             {
@@ -206,11 +198,7 @@ namespace Huisart_Project
 
         private void InputCheck(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NaamTxtBx.Text)&&
-                !string.IsNullOrWhiteSpace(AchternaamTxt.Text)&&
-                !string.IsNullOrWhiteSpace(AdresTxtBx.Text)&&
-                !string.IsNullOrWhiteSpace(EmailTxtBx.Text)&&
-                !string.IsNullOrWhiteSpace(TeleTxtBx.Text))
+            if (TxtBoxTekstCheck())
             {
                 ToevoegBtn.Enabled = true;
             }
@@ -224,6 +212,18 @@ namespace Huisart_Project
         {
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
+            // Maakt de textboxes leeg
+            CleanTxtBox();
+        }
+
+        private void PatientenGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                PatientenBtnPnl.Visible = true;
+        }
+
+
+        private bool TxtBoxTekstCheck()
+        {
             // Checkt of de textboxes niet leeg zijn
             if (!string.IsNullOrEmpty(NaamTxtBx.Text) &&
                 !string.IsNullOrEmpty(AchternaamTxtBx.Text) &&
@@ -231,22 +231,23 @@ namespace Huisart_Project
                 !string.IsNullOrEmpty(EmailTxtBx.Text) &&
                 !string.IsNullOrEmpty(TeleTxtBx.Text))
             {
-                // Maakt de textboxes leeg
-                NaamTxtBx.Text = "";
-                AchternaamTxtBx.Text = "";
-                AdresTxtBx.Text = "";
-                EmailTxtBx.Text = "";
-                TeleTxtBx.Text = "";
+
+                return true;
             }
             else
             {
-                return;
+                return false;
             }
         }
 
-        private void PatientenGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void CleanTxtBox()
         {
-                PatientenBtnPnl.Visible = true;
+            // Maakt de textboxes leeg
+            NaamTxtBx.Text = "";
+            AchternaamTxtBx.Text = "";
+            AdresTxtBx.Text = "";
+            EmailTxtBx.Text = "";
+            TeleTxtBx.Text = "";
         }
     }
 }
