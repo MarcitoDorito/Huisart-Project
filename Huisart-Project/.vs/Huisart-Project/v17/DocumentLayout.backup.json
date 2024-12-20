@@ -3,15 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\huisart-project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|c:\\users\\marco\\documents\\github\\huisart-project\\huisart-project\\huisart-project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|solutionrelative:huisart-project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\huisart-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|solutionrelative:huisart-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|c:\\users\\marco\\documents\\github\\huisart-project\\huisart-project\\huisart-project\\huisartsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\huisart-project\\huisartsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|solutionrelative:huisart-project\\huisartsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -21,6 +17,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\huisart-project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|solutionrelative:huisart-project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\huisart-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66E44B4C-844A-4A57-AA9B-515B7074D8B9}|Huisart-Project\\Huisart-Project.csproj|solutionrelative:huisart-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,13 +34,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Dashboard.cs",
               "DocumentMoniker": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs",
               "RelativeDocumentMoniker": "Huisart-Project\\Dashboard.cs",
-              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs",
-              "RelativeToolTip": "Huisart-Project\\Dashboard.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAuwCQAAAAXAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs*",
+              "RelativeToolTip": "Huisart-Project\\Dashboard.cs*",
+              "ViewState": "AgIAAN8AAAAAAAAAAAAUwCQAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T12:11:28.582Z",
               "IsPinned": true,
@@ -48,12 +48,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Dashboard.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.Designer.cs",
               "RelativeDocumentMoniker": "Huisart-Project\\Dashboard.Designer.cs",
-              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.Designer.cs",
-              "RelativeToolTip": "Huisart-Project\\Dashboard.Designer.cs",
+              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.Designer.cs*",
+              "RelativeToolTip": "Huisart-Project\\Dashboard.Designer.cs*",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T16:19:52.717Z",
@@ -78,16 +78,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "HuisartsDB.cs",
               "DocumentMoniker": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\HuisartsDB.cs",
               "RelativeDocumentMoniker": "Huisart-Project\\HuisartsDB.cs",
               "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\HuisartsDB.cs",
               "RelativeToolTip": "Huisart-Project\\HuisartsDB.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAowG0AAABsAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAmwG0AAABsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:11:12.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T12:11:12.076Z"
             },
             {
               "$type": "Document",
@@ -95,15 +94,15 @@
               "Title": "Dashboard.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs",
               "RelativeDocumentMoniker": "Huisart-Project\\Dashboard.cs",
-              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs [Design]",
-              "RelativeToolTip": "Huisart-Project\\Dashboard.cs [Design]",
+              "ToolTip": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Dashboard.cs [Design]*",
+              "RelativeToolTip": "Huisart-Project\\Dashboard.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T12:11:21.572Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Marco\\Documents\\GitHub\\Huisart-Project\\Huisart-Project\\Huisart-Project\\Program.cs",
               "RelativeDocumentMoniker": "Huisart-Project\\Program.cs",
@@ -111,8 +110,7 @@
               "RelativeToolTip": "Huisart-Project\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:11:14.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T12:11:14.09Z"
             }
           ]
         }

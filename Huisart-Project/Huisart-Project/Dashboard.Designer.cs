@@ -51,10 +51,10 @@
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.UpdateBtn = new System.Windows.Forms.Button();
             this.NotePanel = new System.Windows.Forms.Panel();
+            this.NotitieRichTxtBx = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.AddNotebtn = new System.Windows.Forms.Button();
             this.NoteGrid = new System.Windows.Forms.DataGridView();
-            this.NotitieRichTxtBx = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PatientenGrid)).BeginInit();
             this.ToevoegPanel.SuspendLayout();
             this.PatientenBtnPnl.SuspendLayout();
@@ -79,6 +79,7 @@
             // 
             // AddButton
             // 
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddButton.Location = new System.Drawing.Point(12, 563);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(167, 39);
@@ -89,6 +90,8 @@
             // 
             // ToevoegPanel
             // 
+            this.ToevoegPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ToevoegPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ToevoegPanel.Controls.Add(this.CancelBtn);
             this.ToevoegPanel.Controls.Add(this.ToevoegBtn);
@@ -238,6 +241,7 @@
             // 
             // PatientenBtnPnl
             // 
+            this.PatientenBtnPnl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PatientenBtnPnl.Controls.Add(this.DeleteBtn);
             this.PatientenBtnPnl.Controls.Add(this.UpdateBtn);
             this.PatientenBtnPnl.Location = new System.Drawing.Point(279, 563);
@@ -268,6 +272,7 @@
             // 
             // NotePanel
             // 
+            this.NotePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NotePanel.Controls.Add(this.NotitieRichTxtBx);
             this.NotePanel.Controls.Add(this.button2);
             this.NotePanel.Controls.Add(this.AddNotebtn);
@@ -276,6 +281,14 @@
             this.NotePanel.Name = "NotePanel";
             this.NotePanel.Size = new System.Drawing.Size(377, 599);
             this.NotePanel.TabIndex = 7;
+            // 
+            // NotitieRichTxtBx
+            // 
+            this.NotitieRichTxtBx.Location = new System.Drawing.Point(4, 406);
+            this.NotitieRichTxtBx.Name = "NotitieRichTxtBx";
+            this.NotitieRichTxtBx.Size = new System.Drawing.Size(370, 138);
+            this.NotitieRichTxtBx.TabIndex = 3;
+            this.NotitieRichTxtBx.Text = "";
             // 
             // button2
             // 
@@ -298,6 +311,7 @@
             // 
             // NoteGrid
             // 
+            this.NoteGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.NoteGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -310,6 +324,7 @@
             this.NoteGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.NoteGrid.Location = new System.Drawing.Point(3, 3);
             this.NoteGrid.Name = "NoteGrid";
+            this.NoteGrid.ReadOnly = true;
             this.NoteGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.NoteGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
@@ -318,14 +333,6 @@
             this.NoteGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.NoteGrid.Size = new System.Drawing.Size(371, 396);
             this.NoteGrid.TabIndex = 0;
-            // 
-            // NotitieRichTxtBx
-            // 
-            this.NotitieRichTxtBx.Location = new System.Drawing.Point(4, 406);
-            this.NotitieRichTxtBx.Name = "NotitieRichTxtBx";
-            this.NotitieRichTxtBx.Size = new System.Drawing.Size(370, 138);
-            this.NotitieRichTxtBx.TabIndex = 3;
-            this.NotitieRichTxtBx.Text = "";
             // 
             // Dashboard
             // 
