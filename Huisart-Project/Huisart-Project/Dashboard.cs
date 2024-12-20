@@ -25,6 +25,7 @@ namespace Huisart_Project
             TelefoonnummerTxtBx.MaxLength = 12;
             TelefoonnummerTxtBx.TextChanged += TeleTxtBx_TextChanged;
             ToevoegBtn.Enabled = false;
+            NotePanel.Visible = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -99,13 +100,13 @@ namespace Huisart_Project
             }
         }
 
-        private void VoegToeAanDatabase()
+        private void AddPatientToDatabase()
         {
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
 
             // Checkt of de textboxes niet leeg zijn
-            if (TxtBoxTekstCheck())
+            if (InputFieldChecker())
             {
                 // Voegt de nieuwe patient toe aan de datatable
                 //DataTable dataTable = (DataTable)PatientenGrid.DataSource;
@@ -137,7 +138,7 @@ namespace Huisart_Project
                 }
 
                 // Maakt de textboxes leeg
-                CleanTxtBox();
+                ClearInputField();
             }
             else
             {
@@ -145,13 +146,13 @@ namespace Huisart_Project
             }
         }
 
-        private void UpdateInDatabase()
+        private void UpdateDatabase()
         {
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
 
             // Checkt of de textboxes niet leeg zijn
-            if (TxtBoxTekstCheck())
+            if (InputFieldChecker())
             {
                 string query = "UPDATE patienten SET first_name = @first_name, last_name = @last_name, Adres = @Adres, email = @email, Telefoonnummer = @Telefoonnummer WHERE id = @patient_id;";
 
@@ -176,7 +177,7 @@ namespace Huisart_Project
                 }
 
                 // Maakt de textboxes leeg
-                CleanTxtBox();
+                ClearInputField();
             }
             else
             {
@@ -184,20 +185,20 @@ namespace Huisart_Project
             }
         }
 
-
         private void ToevoegBtn_Click(object sender, EventArgs e)
         { 
             if (ToevoegBtn.Text == "Toevoegen")
             {
-                VoegToeAanDatabase();
+                AddPatientToDatabase();
             }
             else if (ToevoegBtn.Text == "Update")
             {
-                UpdateInDatabase();
+                UpdateDatabase();
             }
         }
 
-        private void GeenNummer_KeyPress(object sender, KeyPressEventArgs e)
+        //Deze functie zorgt ervoor dat de textboxes alleen letters accepteren
+        private void OnlyAlphabeticField_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Checkt of de input een letter is
             if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
@@ -206,7 +207,8 @@ namespace Huisart_Project
             }
         }
 
-        private void GeenLetters_KeyPress(object sender, KeyPressEventArgs e)
+        //Deze functie zorgt ervoor dat de textboxes alleen nummers accepteren
+        private void OnlyNumericField_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Checkt of de input een nummer is
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '-')
@@ -215,6 +217,7 @@ namespace Huisart_Project
             }
         }
 
+        //Deze functie zorgt voor het filteren van de tabel op basis van een zoekbalk
         private void ZoekBalk_TextChanged(object sender, EventArgs e)
         {
             // Filtert de datatable op basis van de zoekbalk
@@ -243,6 +246,7 @@ namespace Huisart_Project
             }
         }
 
+        //Deze functie zorgt ervoor dat de textboxes worden leeggemaakt als de gebruiker op de clear button klikt
         private void ClearBtn_Click(object sender, EventArgs e)
         {
             // Maakt de zoekbalk leeg
@@ -281,7 +285,7 @@ namespace Huisart_Project
 
         private void InputCheck(object sender, EventArgs e)
         {
-            if (TxtBoxTekstCheck())
+            if (InputFieldChecker())
             {
                 ToevoegBtn.Enabled = true;
             }
@@ -296,18 +300,57 @@ namespace Huisart_Project
             ToevoegPanel.Visible = false;
             AddButton.Enabled = true;
             // Maakt de textboxes leeg
-            CleanTxtBox();
+            ClearInputField();
+        }
+
+        private void AddNoteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            if(PatientenGrid.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = PatientenGrid.SelectedRows[0];
+                var patientId = selectedRow.Cells["id"].Value.ToString();
+                databaseHelper.AddNotitie(patientId, NotitieRichTxtBx.Text);
+                LoadPatientNotities(patientId);
+                NotitieRichTxtBx.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Geen rij geselecteerd");
+            }
+            
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void LoadPatientNotities(string patientID)
+        {
+            var notities = databaseHelper.GetNotitiesBYpatientId(patientID);
+            DataTable notitiesTable = new DataTable();
+            notitiesTable.Columns.Add("Notitie");
+            notitiesTable.Columns.Add("Datum");
+
+            foreach (var notitie in notities)
+            {
+                notitiesTable.Rows.Add(notitie.note, notitie.Created_at);
+            }
+            
+            NoteGrid.DataSource = notitiesTable;
         }
 
         private void PatientenGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
                 PatientenBtnPnl.Visible = true;
-
+                NotePanel.Visible = true;
             if (PatientenGrid.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = PatientenGrid.SelectedRows[0];
-
                 var idValue = selectedRow.Cells["id"].Value;
+                LoadPatientNotities(idValue.ToString());
 
 
             }
@@ -318,7 +361,7 @@ namespace Huisart_Project
         }
 
 
-        private bool TxtBoxTekstCheck()
+        private bool InputFieldChecker()
         {
             // Checkt of de textboxes niet leeg zijn
             if (!string.IsNullOrEmpty(VoornaamTxtBx.Text) &&
@@ -336,7 +379,7 @@ namespace Huisart_Project
             }
         }
 
-        private void CleanTxtBox()
+        private void ClearInputField()
         {
             // Maakt de textboxes leeg
             VoornaamTxtBx.Text = "";

@@ -31,6 +31,13 @@ namespace Huisart_Project
             public string telefoonnummer;
             public string id;
         }
+
+        public class Notes
+        {
+            public string note;
+            public DateTime Created_at;
+        }
+
         public List<Patienten> GetPatienten()
         {
             var patientenLijst = new List<Patienten>();
@@ -63,6 +70,57 @@ namespace Huisart_Project
                 }
                 Console.WriteLine(patientenLijst);
                 return patientenLijst;
+            }
+        }
+
+        public List<Notes> GetNotitiesBYpatientId(string patientId)
+        {
+            var notitiesLijst = new List<Notes>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT Notitie, created_at FROM patientennotitie WHERE id = @id";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", patientId);
+                try
+                {
+                    connection.Open();
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Notes note = new Notes();
+                        note.note = reader["Notitie"].ToString();
+                        note.Created_at = Convert.ToDateTime(reader["created_at"]);
+                        notitiesLijst.Add(note);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                Console.WriteLine(notitiesLijst);
+                return notitiesLijst;
+            }
+        }
+        public void AddNotitie(string patientId, string notitie)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string query = "INSERT INTO patientennotitie (id, notitie, created_at) VALUES (@id, @notitie, @created_at)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", patientId);
+                command.Parameters.AddWithValue("@Notitie", notitie);
+                command.Parameters.AddWithValue("@created_at", DateTime.Now);
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

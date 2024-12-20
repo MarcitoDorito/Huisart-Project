@@ -34,7 +34,6 @@ C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.AssemblyReference.cache
-C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Form1.resources
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Properties.Resources.resources
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.GenerateResource.cache
 C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.csproj.CoreCompileInputs.cache
@@ -84,3 +83,4 @@ C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.exe
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart-Project.pdb
 C:\Users\marci\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Dashboard.resources
+C:\Users\Marco\Documents\GitHub\Huisart-Project\Huisart-Project\Huisart-Project\obj\Debug\Huisart_Project.Dashboard.resources
